@@ -3,7 +3,7 @@
 guake --show;
 guake -r redshift;
 guake -e "redshift -v";
-guake --new-tab="/home/jonathanb/project-environments/fabufor" -e "./start.sh --debug" -r lux-light
+guake --new-tab="/home/jonathanb/project-environments/fabufor" -e "./start.sh --verbose" -r lux-light
 guake --new-tab="/home/jonathanb/Dropbox/dev/canticle" -e "node . -p jams" -r music
 guake --new-tab=~ -e "ssh dt1" -r dt1-src
 sleep 1
