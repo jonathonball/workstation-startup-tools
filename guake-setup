@@ -3,8 +3,17 @@
 guake --show;
 guake -r redshift;
 guake -e "redshift -v";
-guake --new-tab=~ -e "cd ~/Dropbox/dev/canticle; node ." -r music
+guake --new-tab="/home/jonathanb/project-environments/fabufor" -e "./start.sh --debug" -r lux-light
+guake --new-tab="/home/jonathanb/Dropbox/dev/canticle" -e "node . -p jams" -r music
 guake --new-tab=~ -e "ssh dt1" -r dt1-src
+sleep 1
+guake -e "cdsrc";
 guake --new-tab=~ -e "ssh dt1" -r dt1-op
+sleep 1
+guake -e "cdop";
 guake --new-tab=~ -e "ssh dt1" -r dt1-mysql
+sleep 1
+guake -e "MYsql";
 guake --new-tab=~ -r localhost
+guake --hide
+notify-send -i ~/.face Guake "Setup completed"
