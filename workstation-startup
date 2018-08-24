@@ -1,0 +1,4 @@
+#!/bin/bash
+
+~/bin/ssh-add-persistently dev-test1 github;
+~/bin/guake-setup;

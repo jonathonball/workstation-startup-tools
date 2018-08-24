@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while (( "$#" )); do
+    until ssh-add ~/.ssh/${1}; do
+        echo "You fucked up, try again!";
+    done
+    shift;
+done

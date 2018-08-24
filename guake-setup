@@ -1,0 +1,10 @@
+#!/bin/bash
+
+guake --show;
+guake -r redshift;
+guake -e "redshift -v";
+guake --new-tab=~ -e "cd ~/Dropbox/dev/canticle; node ." -r music
+guake --new-tab=~ -e "ssh dt1" -r dt1-src
+guake --new-tab=~ -e "ssh dt1" -r dt1-op
+guake --new-tab=~ -e "ssh dt1" -r dt1-mysql
+guake --new-tab=~ -r localhost
