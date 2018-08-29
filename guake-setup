@@ -1,19 +1,22 @@
 #!/bin/bash
-
+# Written for Guake Terminal 3.0.5
+BASE_DIR=/home/jonathanb
 guake --show;
-guake -r redshift;
-guake -e "redshift -v";
-guake --new-tab="/home/jonathanb/project-environments/fabufor" -e "./start.sh --verbose" -r lux-light
-guake --new-tab="/home/jonathanb/Dropbox/dev/canticle" -e "node . -p jams" -r music
-guake --new-tab=~ -e "ssh dt1" -r dt1-src
-sleep 1
+
+guake -e "redshift -v" -r redshift;
+
+guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "./start.sh --verbose" -r lux-light
+
+guake --new-tab="${BASE_DIR}/Dropbox/dev/canticle" -e "node . -p jams" -r music
+
+guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-src
 guake -e "cdsrc";
-guake --new-tab=~ -e "ssh dt1" -r dt1-op
-sleep 1
+guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-op
 guake -e "cdop";
-guake --new-tab=~ -e "ssh dt1" -r dt1-mysql
-sleep 1
-guake -e "MYsql";
-guake --new-tab=~ -r localhost
+guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-mysql
+guake -e "clear; MYsql";
+
+guake --new-tab="${BASE_DIR}" -r localhost
+
 guake --hide
 notify-send -i ~/.face Guake "Setup completed"
