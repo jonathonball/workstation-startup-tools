@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Slack
+GenericName=Slack
+Comment=Media rich messaging service
+Exec=slack
+Terminal=false
+Type=Application
+Icon=slack

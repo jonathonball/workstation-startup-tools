@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=KeeWeb
+GenericName=Credential storage
+Comment=Auth
+Exec=KeeWeb
+Terminal=false
+Type=Application
+Icon=keeweb

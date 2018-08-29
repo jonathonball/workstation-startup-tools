@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Guake
+GenericName=Terminal emulator
+Comment=Guake
+Exec=guake
+Terminal=false
+Type=Application
+Icon=guake
