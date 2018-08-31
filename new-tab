@@ -1,0 +1,9 @@
+#!/bin/bash
+
+tabName='';
+while [[ -z "$tabName" ]]; do
+	read -p "What would you like to rename the current tab? " tabName;
+	guake -e 'clear' -r "${tabName}";
+	guake --new-tab="/home/jonathanb" -e "clear; cat ~/bin/motd/cat-in-the-hat.txt" -r "localhost";
+done;
+
