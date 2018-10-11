@@ -5,7 +5,7 @@ guake --show;
 
 guake -e "redshift -v" -r redshift;
 
-guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "./start.sh --verbose" -r lux-light
+guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "fabufor --color red --led ALL" -r lux-light
 
 guake --new-tab="${BASE_DIR}/Dropbox/dev/canticle" -e "node . -p jams" -r music
 
