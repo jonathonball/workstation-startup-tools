@@ -1,4 +1,4 @@
 #!/bin/bash
 
-~/bin/ssh-add-persistently dev-test1 github ecjs bbkf2salesdashpro;
+~/bin/ssh-add-persistently dev-test1 github bbkf2salesdashpro;
 ~/bin/guake-setup;
