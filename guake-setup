@@ -7,7 +7,7 @@ guake -e "redshift -v" -r redshift;
 
 guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "fabufor --color red --led ALL" -r lux-light
 
-guake --new-tab="${BASE_DIR}/Dropbox/dev/canticle" -e "node . -p jams" -r music
+guake --new-tab="${BASE_DIR}" -e "canticle" -r canticle
 
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-src
 guake -e "cdsrc";
