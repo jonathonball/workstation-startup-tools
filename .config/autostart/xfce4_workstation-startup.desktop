@@ -5,4 +5,4 @@ Comment=Script to setup workstation
 Exec=terminator -e /home/jonathanb/bin/workstation-startup
 Terminal=false
 Type=Application
-Icon=keeweb
+Icon=None
