@@ -80,8 +80,9 @@
   - docker - https://docs.docker.com/install/linux/docker-ce/ubuntu/
     - Add the following to `/etc/docker/daemon.json`
 
+
     {
-	    "bip": "192.168.2.1/24"
+        "bip": "192.168.2.1/24"
     }
 
 # Browser Setup
