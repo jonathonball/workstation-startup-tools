@@ -13,8 +13,8 @@
 # Copy in keepass key file 
 
 # Install from repos:
-  - exfat-fuse    # to support some flash drives
-  - exfat-utils   # to support some flash drives
+  - exfat-fuse    
+  - exfat-utils
   - vim
   - curl
   - zsh
