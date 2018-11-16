@@ -1,0 +1,17 @@
+#!/bin/bash
+
+exists() {
+  command="$1";
+  shift;
+  if ! type -p "${command}" 2>&1 1>/dev/null; then
+      echo "${command}: command not found";
+      exit 1;
+  fi;
+  return 0;
+}
+
+if exists "nohup"; then
+  if exists "${1}"; then
+    nohup "${1}" "$@" &>/dev/null & disown %%;
+  fi;
+fi;
