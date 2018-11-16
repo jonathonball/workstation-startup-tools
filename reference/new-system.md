@@ -87,8 +87,8 @@
 ```
 
 # Browser Setup
-Login to sync for Google Chrome
-Login to sync for Firefox
+- Login to sync for Google Chrome
+- Login to sync for Firefox
 
 ## Add userChrome.css to Firefire
 File path is `/home/${USER}/.mozilla/firefox/########.default/chrome/userChrome.css`
