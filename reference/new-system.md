@@ -112,6 +112,32 @@ File path is `/home/${USER}/.mozilla/firefox/########.default/chrome/userChrome.
         visibility: collapse;
     }
 
+## Add custom css to Atom
+File path is `~/.atom/styles.less`
+
+    @remote-ftp-font-size: 11px;
+
+    // Set remote-ftp's tree view font size
+    li.file.entry.list-item {
+        font-size: @remote-ftp-font-size;
+    }
+    div.header.list-item {
+        font-size: @remote-ftp-font-size;
+    }
+
+    // Set remote-ftp's tree view indent size
+    .list-tree.has-collapsable-children .list-nested-item > .list-tree > li,
+    .list-tree.has-collapsable-children .list-nested-item > .list-group > li {
+        padding-left: 8px;
+    }
+
+    // Add in super-annoying whitespace highlighting
+    .trailing-whitespace {
+        text-decoration: line-through;
+        text-decoration-color: #cc6666 !important;
+        opacity: 0.7;
+    }
+
 # Bring in https://github.com/jonathonball/workstation-startup-tools
   - Add keyboard shortcut for `move-to-next-monitor`
 
