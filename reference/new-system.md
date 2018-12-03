@@ -41,6 +41,13 @@
   - htop
   - vlc
   - whois
+  - figlet
+  - lolcat
+  - usb-creator-gtk
+  - zenmap
+  - xbacklight
+  - jq
+  - html-xml-utils
 
 # Laptop Specific
   - acpi
