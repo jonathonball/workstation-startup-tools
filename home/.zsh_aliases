@@ -20,4 +20,3 @@ alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
 alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null"
 alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null"
 alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 2>/dev/null"
-
