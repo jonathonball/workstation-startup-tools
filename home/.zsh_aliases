@@ -13,7 +13,7 @@ function gtfo() {
 };
 
 alias ll="ls -lah"
-alias clear="clear; cat ~/bin/motd/cat-in-the-hat.txt";
+alias clear="clear; cat /home/jonathanb/project-environments/workstation-startup/motd/cat-in-the-hat.txt";
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
 alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
