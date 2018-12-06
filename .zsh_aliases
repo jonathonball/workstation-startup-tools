@@ -3,7 +3,15 @@
 #   source /home/${USER}/bin/.zsh_aliases
 # fi
 
-alias gtfo="sudo shutdown -h now"
+function gtfo() {
+    sudo echo "Starting shutdown sequence..";
+    for container in $(docker container ls --quiet); do
+        echo "Found docker container ${container} running, attempting to stop..";
+        docker container stop $container;
+    done;
+    sudo shutdown -h +1 "System powering off in 60 seconds.";
+};
+
 alias ll="ls -lah"
 alias clear="clear; cat ~/bin/motd/cat-in-the-hat.txt";
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
