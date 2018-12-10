@@ -9,7 +9,7 @@
  [[ -n $BASH_VERSION ]] && (return 2>/dev/null)) && sourced=1 || sourced=0
 
 if [[ "$sourced" -eq 0 ]]; then
-  echo "File must be sourced, not executed!";
+  echo "File must be sourced, not executed!" 1>&2;
   exit 255;
 fi;
 
