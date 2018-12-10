@@ -3,6 +3,16 @@
 #   source /home/${USER}/bin/.zsh_aliases
 # fi
 
+([[ -n $ZSH_EVAL_CONTEXT && $ZSH_EVAL_CONTEXT =~ :file$ ]] ||
+ [[ -n $KSH_VERSION && $(cd "$(dirname -- "$0")" &&
+    printf '%s' "${PWD%/}/")$(basename -- "$0") != "${.sh.file}" ]] ||
+ [[ -n $BASH_VERSION ]] && (return 2>/dev/null)) && sourced=1 || sourced=0
+
+if [[ "$sourced" -eq 0 ]]; then
+  echo "File must be sourced, not executed!";
+  exit 255;
+fi;
+
 function gtfo() {
   sudo echo "Starting shutdown sequence..";
   for container in $(docker container ls --quiet); do
