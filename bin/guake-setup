@@ -16,7 +16,7 @@ guake -e "cdop";
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-mysql
 guake -e "clear; MYsql";
 
-guake --new-tab="${BASE_DIR}" -e "clear" -r localhost
+guake --new-tab="${BASE_DIR}" -e "jclear" -r localhost
 
 guake --hide
 notify-send -i ~/.face Guake "Setup completed"

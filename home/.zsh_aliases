@@ -4,19 +4,25 @@
 # fi
 
 function gtfo() {
-    sudo echo "Starting shutdown sequence..";
-    for container in $(docker container ls --quiet); do
-        echo "Found docker container ${container} running, attempting to stop..";
-        docker container stop $container;
-    done;
-    sudo shutdown -h +1 "System powering off in 60 seconds.";
+  sudo echo "Starting shutdown sequence..";
+  for container in $(docker container ls --quiet); do
+    echo "Found docker container ${container} running, attempting to stop..";
+    docker container stop $container;
+  done;
+  sudo shutdown -h +1 "System powering off in 60 seconds.";
+};
+
+function jclear {
+  clear;
+  find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
 };
 
 alias ll="ls -lah"
-alias clear="clear; cat /home/jonathanb/project-environments/workstation-startup/motd/cat-in-the-hat.txt";
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
 alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
 alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null"
 alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null"
 alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 2>/dev/null"
+alias d-enter="docker container exec -it";
+alias d-ls="docker container ls --all";

@@ -6,7 +6,7 @@ function newTab() {
         read -p "Please enter name of new tab: " tabName;
     fi;
     guake -e 'clear' -r "${tabName}";
-    guake --new-tab="/home/jonathanb" -e "cd ~; clear" -r "localhost";
+    guake --new-tab="/home/jonathanb" -e "cd ~; jclear" -r "localhost";
 };
 
 currentTab=$(guake -g);
