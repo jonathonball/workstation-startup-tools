@@ -13,12 +13,16 @@ if [[ "$sourced" -eq 0 ]]; then
   exit 255;
 fi;
 
-function gtfo() {
-  sudo echo "Starting shutdown sequence..";
+function clean-up-docker() {
   for container in $(docker container ls --quiet); do
     echo "Found docker container ${container} running, attempting to stop..";
     docker container stop $container;
   done;
+};
+
+function gtfo() {
+  sudo echo "Starting shutdown sequence..";
+  clean-up-docker;
   sudo shutdown -h +1 "System powering off in 60 seconds.";
 };
 
