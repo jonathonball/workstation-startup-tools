@@ -11,7 +11,7 @@ local PR_USER PR_USER_OP PR_PROMPT PR_HOST
 if [[ $UID -ne 0 ]]; then # normal user
   PR_USER='%F{green}%n%f'
   PR_USER_OP='%F{green}%#%f'
-  PR_PROMPT='%f➤ %f'
+  PR_PROMPT='%f➤%f'
 else # root
   PR_USER='%F{red}%n%f'
   PR_USER_OP='%F{red}%#%f'
@@ -25,16 +25,15 @@ else
   PR_HOST='%F{green}%M%f' # no SSH
 fi
 
-local return_code="%(?..[%F{red}%?%f])"
-
-local user_host="${PR_USER}%F{cyan}@${PR_HOST}"
+local user_host="${PR_HOST}"
 local current_dir="%B%F{blue}%~%f%b"
-
+local return_code="%(?..[%F{red}%?%f])"
 local git_branch='$(git_prompt_info)'
 local virtualenv_name='$(virtualenv_prompt_info)'
+local top_line_data="$(implode $user_host $current_dir $return_code $git_branch $virtualenv_name)"
+local top_line="╭─${top_line_data}"
 
-
-PROMPT="╭─${user_host} ${current_dir} ${return_code} ${git_branch}${virtualenv_name}
+PROMPT="${top_line}
 ╰─$PR_PROMPT "
 #RPROMPT="${return_code}"
 RPROMPT=""

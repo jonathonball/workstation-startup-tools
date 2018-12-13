@@ -1,0 +1,11 @@
+#!/usr/bin/env python2
+
+import sys
+
+output = ''
+for section in sys.argv[1:]:
+    section = section.strip()
+    if section:
+        output = output + section + ' '
+if output:
+    print(' '.join(output.strip().split()))
