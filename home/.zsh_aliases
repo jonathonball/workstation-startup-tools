@@ -47,6 +47,7 @@ alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height
 # [docker]
 alias d-enter="docker container exec -it";
 alias d-ls="docker container ls --all";
+alias d-start="docker run -it";
 
 # [pulseaudio]
 alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
