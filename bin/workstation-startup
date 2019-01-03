@@ -3,11 +3,17 @@
 while true; do
   echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
   if [ $? -eq 0 ]; then
-    ssh-add-persistently dev-test1 github bbkf2salesdashpro;
-    guake-setup;
-    exit 0;
+    ps -ef | egrep "[g]uake" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+      ssh-add-persistently dev-test1 github bbkf2salesdashpro;
+      guake-setup;
+    else
+      echo "Refusing to setup your workstation because guake isnt running!";
+      exit 255;
+    fi;
   else
       echo "Refusing to setup your workstation because you are offline!";
       exit 255;
-  fi
-done
+  fi;
+done;
+
