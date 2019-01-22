@@ -5,28 +5,28 @@ var target = process.argv[2];
 var targetRaw = null;
 
 function error_and_quit(msg, err = null) {
-  if (err) {
-    console.error(err);
-  }
-  console.error(msg);
-  process.exit(1);
+    if (err) {
+      console.error(err);
+    }
+    console.error(msg);
+    process.exit(1);
 }
 
 function find_file_by_name(location, regex) {
-  let result = null;
-  let files = fs.readdirSync(location);
-  files.forEach((file) => {
-    if (file.match(regex)) {
-      if (result) {
-        error_and_quit('Found too many files!');
-      }
-      result = file;
+    let result = null;
+    let files = fs.readdirSync(location);
+    files.forEach((file) => {
+        if (file.match(regex)) {
+          if (result) {
+              error_and_quit('Found too many files!');
+          }
+          result = file;
+        }
+    });
+    if (! result) {
+        error_and_quit('Did not find file');
     }
-  });
-  if (! result) {
-    error_and_quit('Did not find file');
-  }
-  return result;
+    return result;
 }
 
 if (! target) {
@@ -40,13 +40,13 @@ if (! fs.existsSync(target)) {
 try {
     targetRaw = fs.readFileSync(target, 'utf8');
 } catch(err) {
-  error_and_quit('Failed to read file ' + target, err);
+    error_and_quit('Failed to read file ' + target, err);
 }
 
 try {
     targetData = JSON.parse(targetRaw);
 } catch(err) {
-  error_and_quit('Could not parse json from ' + target, err);
+    error_and_quit('Could not parse json from ' + target, err);
 }
 
 agentDir = find_file_by_name('/tmp', /^ssh-.*/);
@@ -56,5 +56,3 @@ agentPath = '/tmp/' + agentDir + '/' + agentFile;
 targetData.agent = agentPath;
 
 fs.writeFileSync(target, JSON.stringify(targetData));
-
-
