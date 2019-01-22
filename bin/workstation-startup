@@ -7,6 +7,7 @@ while true; do
     if [ $? -eq 0 ]; then
       ssh-add-persistently dev-test1 github bbkf2salesdashpro;
       guake-setup;
+      update-atom-ftpconfig /home/jonathanb/project-environments/dev-test1/.ftpconfig
       exit 0;
     else
       echo "Refusing to setup your workstation because guake isnt running!";
