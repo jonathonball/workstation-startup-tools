@@ -53,3 +53,4 @@ alias d-start="docker run -it";
 alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
 alias volume-set-dock="pactl set-sink-volume $(volume-devices | grep Dock)";
 alias volume-set-laptop="pactl set-sink-volume $(volume-devices | grep pci)";
+alias volume="volume-set-dock";
