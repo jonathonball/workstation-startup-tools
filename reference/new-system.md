@@ -144,3 +144,8 @@ File path is `~/.atom/styles.less`
 # Add these search domains to your networking to make life easier
   - `inmotionhosting.com, webhostinghub.com, servconfig.com`
 
+# Disable gnome-keyring's control over ssh keys
+
+    cp /etc/xdg/autostart/gnome-keyring-ssh.desktop ~/.config/autostart
+    echo "Hidden=true" >> ~/.config/autostart/gnome-keyring-ssh.desktop
+    xfce4-session-logout --logout
