@@ -7,7 +7,7 @@ guake -e "redshift -v" -r redshift;
 
 guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "fabufor --color red --led ALL" -r lux-light
 
-guake --new-tab="${BASE_DIR}" -e "canticle" -r canticle
+guake --new-tab="${BASE_DIR}" -r canticle
 
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-src
 guake -e "cdsrc";
@@ -15,7 +15,9 @@ guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-op
 guake -e "cdop";
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-mysql
 guake -e "clear; MYsql";
-
+guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r fffffuck
+guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
+guake -e "jclear";
 guake --new-tab="${BASE_DIR}" -e "jclear" -r localhost
 
 guake --hide
