@@ -42,7 +42,7 @@ alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
 # [webcam]
 alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null"
 alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null"
-alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 2>/dev/null"
+alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 -vf mirror 2>/dev/null"
 
 # [docker]
 alias d-enter="docker container exec -it";
@@ -54,3 +54,7 @@ alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
 alias volume-set-dock="pactl set-sink-volume $(volume-devices | grep Dock)";
 alias volume-set-laptop="pactl set-sink-volume $(volume-devices | grep pci)";
 alias volume="volume-set-dock";
+
+# [ansible]
+alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py"
+
