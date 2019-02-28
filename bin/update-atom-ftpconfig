@@ -55,4 +55,4 @@ agentPath = '/tmp/' + agentDir + '/' + agentFile;
 
 targetData.agent = agentPath;
 
-fs.writeFileSync(target, JSON.stringify(targetData));
+fs.writeFileSync(target, JSON.stringify(targetData, null, 2));
