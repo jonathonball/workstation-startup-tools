@@ -58,3 +58,6 @@ alias volume="volume-set-dock";
 # [ansible]
 alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py"
 
+# [music]
+alias pandora="pianobar"
+
