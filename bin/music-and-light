@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+tsessionname=music-and-light 
+tmux new-session -d -s $tsessionname;
+tmux split-window -h -t 0;
+tmux -2 attach-session -t $tsessionname;
