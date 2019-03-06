@@ -5,8 +5,7 @@ guake --show;
 
 guake -e "redshift -v" -r redshift;
 
-guake --new-tab="${BASE_DIR}/project-environments/fabufor" -e "fabufor --color red --led ALL" -r lux-light
-
+guake --new-tab="${BASE_DIR}" -e "music-and-light" -r music-and-light
 guake --new-tab="${BASE_DIR}" -r ecjs
 
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-src
