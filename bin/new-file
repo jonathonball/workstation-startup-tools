@@ -51,7 +51,7 @@ function known_file_extension() {
   return 1;
 };
 
-# Read in available template file extensions`
+# Read in available template file extensions
 VALID_FILE_EXTENSIONS=();
 find ~/Templates -type f | while read template; do
   if has_valid_file_extension $template; then
