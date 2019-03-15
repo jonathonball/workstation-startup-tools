@@ -64,3 +64,8 @@ alias pandora="pianobar"
 # [openstack]
 alias openstack-developer-instances="openstack server list --column Name --format value --image developer-instance.imhlabs.net.golden";
 
+# [luxafor light]
+alias lux_strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
+alias lux_911="fabufor --pattern 5 --repeat 0";
+alias lux_away="fabufor --led all --strobe --repeat 0 --time 255 --color DarkRed";
+alias lux_available="fabufor --led all --strobe --repeat 0 --time 255 --color LimeGreen";
