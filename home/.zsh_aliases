@@ -61,3 +61,6 @@ alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory
 # [music]
 alias pandora="pianobar"
 
+# [openstack]
+alias openstack-developer-instances="openstack server list --column Name --format value --image developer-instance.imhlabs.net.golden";
+
