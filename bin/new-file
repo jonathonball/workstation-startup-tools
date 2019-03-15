@@ -55,12 +55,12 @@ for argument in "${@}"; do
     filepath="${argument#*/}";
     extension="${filepath#*.}";
     if file_exists $argument; then
-      echo "$filepath already exists.";
+      echo "$filepath already exists." >&2;
     else
       if known_file_extension $extension; then
         find ~/Templates -name "*.${extension}" -exec cp {} $argument \;
       else
-        echo "Unknown file extension $extension";
+        echo "Unknown file extension $extension" >&2;
       fi;
     fi;
   fi;
