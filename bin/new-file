@@ -1,5 +1,15 @@
 #!/usr/bin/env zsh
 
+function show_usage() {
+  echo "Usage: new-file FILE...";
+  echo "Create one or more files using templates found in ~/Templates";
+  echo "";
+  echo "Script accepts paths one after another as arguments.  Paths can be relative or absolute."
+  echo "";
+  echo "Example:";
+  echo "new-file /tmp/some-text-file.txt";
+};
+
 function string_compare() {
   left=$1;
   operator=$2;
@@ -41,15 +51,32 @@ function known_file_extension() {
   return 1;
 };
 
+# Read in available template file extensions`
 VALID_FILE_EXTENSIONS=();
 find ~/Templates -type f | while read template; do
   if has_valid_file_extension $template; then
     filename="${template##*/}";
     extension="${filename#*.}";
     VALID_FILE_EXTENSIONS=( "${VALID_FILE_EXTENSIONS[@]}" "${extension}");
+  else
+    echo "$template template file doesn't have a valid extension" >&2;
+    exit 1;
   fi;
 done;
 
+# Show usage and exit if user provides -h or --help
+if [[ "${@}" =~ (-h|--help) ]]; then
+  show_usage;
+  exit 1;
+fi;
+
+# Show usage and exit if user provides no arguments
+if [[ "$#" -le "0" ]]; then
+  show_usage;
+  exit 1
+fi;
+
+# Attempt to create a new file for each argument provided
 for argument in "${@}"; do
   if has_valid_file_extension $argument; then
     filepath="${argument#*/}";
