@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+
+function string_compare() {
+  left=$1;
+  operator=$2;
+  right=$3;
+  case "${operator}" in
+    EQUALS|equals)
+      [[ "${left}" == "${right}" ]];
+      return $?;
+      ;;
+    *)
+      return 1;
+      ;;
+  esac;
+};
+
+function has_valid_file_extension() {
+  input_path=$1;
+  filename="${input_path##*/}";
+  extension="${filename#*.}";
+  if string_compare $filename EQUALS $extension; then
+    return 1;
+  fi;
+  return 0;
+};
+
+function file_exists() {
+  filepath=$1;
+  [[ -f $filepath ]];
+  return $?;
+};
+
+function known_file_extension() {
+  extension=$1;
+  for known_extension in "${VALID_FILE_EXTENSIONS[@]}"; do
+    if string_compare $known_extension EQUALS $extension; then
+      return 0;
+    fi;
+  done;
+  return 1;
+};
+
+VALID_FILE_EXTENSIONS=();
+find ~/Templates -type f | while read template; do
+  if has_valid_file_extension $template; then
+    filename="${template##*/}";
+    extension="${filename#*.}";
+    VALID_FILE_EXTENSIONS=( "${VALID_FILE_EXTENSIONS[@]}" "${extension}");
+  fi;
+done;
+
+for argument in "${@}"; do
+  if has_valid_file_extension $argument; then
+    filepath="${argument#*/}";
+    extension="${filepath#*.}";
+    if file_exists $argument; then
+      echo "$filepath already exists.";
+    else
+      if known_file_extension $extension; then
+        find ~/Templates -name "*.${extension}" -exec cp {} $argument \;
+      else
+        echo "Unknown file extension $extension";
+      fi;
+    fi;
+  fi;
+done;
