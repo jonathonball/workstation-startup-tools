@@ -55,6 +55,9 @@ alias volume-set-dock="pactl set-sink-volume $(volume-devices | grep Dock)";
 alias volume-set-laptop="pactl set-sink-volume $(volume-devices | grep pci)";
 alias volume="volume-set-dock";
 
+# [python]
+alias venter="source ./venv/bin/activate";
+
 # [ansible]
 alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py"
 
