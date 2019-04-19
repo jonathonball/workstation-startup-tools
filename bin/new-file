@@ -4,7 +4,10 @@
 # Shows usage information
 function show_usage() {
   echo "Usage: new-file FILE...";
-  echo "This script will examine the file extension of the filename(s) you provide as arguments.  If the extension matches one of the file extensions in ~/Templates then this script produces a copy of that template using the provided path.";
+  echo "This script will examine the file extension of the filename(s) you";
+  echo "provide as arguments.  If the extension(s) of the input matches one of";
+  echo "the file extensions found in ~/Templates then this script produces a";
+  echo "copy of that template at the designated path.";
   echo "";
   echo "Script accepts a single path or multiple paths, one after another, as arguments.  Paths can be relative or absolute.";
   echo "";
