@@ -1,15 +1,23 @@
 #!/usr/bin/env zsh
 
+###
+# Shows usage information
 function show_usage() {
   echo "Usage: new-file FILE...";
-  echo "Create one or more files using templates found in ~/Templates";
+  echo "This script will examine the file extension of the filename(s) you provide as arguments.  If the extension matches one of the file extensions in ~/Templates then this script produces a copy of that template using the provided path.";
   echo "";
-  echo "Script accepts paths one after another as arguments.  Paths can be relative or absolute."
+  echo "Script accepts a single path or multiple paths, one after another, as arguments.  Paths can be relative or absolute.";
   echo "";
   echo "Example:";
   echo "new-file /tmp/some-text-file.txt";
 };
 
+###
+# Compares two strings using an operator
+# $1 = first string to compare
+# $2 = the operator, ex EQUALS
+# $3 = second string to compare
+# returns integer (boolean)
 function string_compare() {
   left=$1;
   operator=$2;
@@ -25,6 +33,10 @@ function string_compare() {
   esac;
 };
 
+###
+# Checks to see if a filename contains a valid extension
+# $1 = user input path
+# returns integer (boolean)
 function has_valid_file_extension() {
   input_path=$1;
   filename="${input_path##*/}";
@@ -35,12 +47,20 @@ function has_valid_file_extension() {
   return 0;
 };
 
+###
+# Human readable alias for [[ -f /filepath ]]
+# $1 = path to check existence of
+# returns integer (boolean)
 function file_exists() {
   filepath=$1;
   [[ -f $filepath ]];
   return $?;
 };
 
+###
+# Check that a file extension is in our cache of valid ones
+# $1 = the extension to check for
+# returns integer (boolean)
 function known_file_extension() {
   extension=$1;
   for known_extension in "${VALID_FILE_EXTENSIONS[@]}"; do
@@ -51,7 +71,7 @@ function known_file_extension() {
   return 1;
 };
 
-# Read in available template file extensions
+# Read available template file extensions into an array (cache)
 VALID_FILE_EXTENSIONS=();
 find ~/Templates -type f | while read template; do
   if has_valid_file_extension $template; then
