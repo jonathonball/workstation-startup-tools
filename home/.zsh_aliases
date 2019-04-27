@@ -71,4 +71,4 @@ alias openstack-developer-instances="openstack server list --column Name --forma
 alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
 alias lux-911="fabufor --pattern 5 --repeat 0";
 alias lux-away="fabufor --led all --strobe --repeat 0 --time 255 --color DarkRed";
-alias lux-available="fabufor --led all --strobe --repeat 0 --time 255 --color LimeGreen";
+alias lux-available="fabufor --led all --strobe --repeat 0 --time 255 --color Green";
