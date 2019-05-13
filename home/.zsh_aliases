@@ -32,7 +32,8 @@ function jclear {
 };
 
 # [linux]
-alias ll="ls -lah"
+alias ll="ls -lah";
+alias add-to-tab-order="echo 'Click on the errant window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_NORMAL";
 
 # [ssh]
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
@@ -40,9 +41,9 @@ alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
 
 # [webcam]
-alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null"
-alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null"
-alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 -vf mirror 2>/dev/null"
+alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null";
+alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null";
+alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 -vf mirror 2>/dev/null";
 
 # [docker]
 alias d-enter="docker container exec -it";
@@ -59,10 +60,10 @@ alias volume="volume-set-dock";
 alias venter="source ./venv/bin/activate";
 
 # [ansible]
-alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py"
+alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py";
 
 # [music]
-alias pandora="pianobar"
+alias pandora="pianobar";
 
 # [openstack]
 alias openstack-developer-instances="openstack server list --column Name --format value --image developer-instance.imhlabs.net.golden";
