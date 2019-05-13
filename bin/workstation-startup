@@ -17,8 +17,17 @@ while true; do
       exit 255;
     fi;
   else
+    read -p "You are off-line.  Attempt connect via ethernet? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo ip link set dev enp0s31f6 up;
+        sudo dhclient;
+        echo "Please run this script again.";
+        exit 0;
+    else
       echo "Refusing to setup your workstation because you are offline!";
       exit 255;
+    fi;
   fi;
 done;
 
