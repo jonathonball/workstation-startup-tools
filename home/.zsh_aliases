@@ -34,6 +34,7 @@ function jclear {
 # [linux]
 alias ll="ls -lah";
 alias add-to-tab-order="echo 'Click on the errant window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_NORMAL";
+alias remove-from-tab-order="echo 'Click on the window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_MAIN";
 
 # [ssh]
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
