@@ -39,7 +39,7 @@
   - xscreensaver-gl
   - xscreensaver-gl-extra
   - htop
-  - vlc
+  - git
   - whois
   - figlet
   - lolcat
