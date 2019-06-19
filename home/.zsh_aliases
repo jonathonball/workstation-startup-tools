@@ -55,6 +55,11 @@ alias d-enter="docker container exec -it";
 alias d-ls="docker container ls --all";
 alias d-start="docker run -it";
 
+# [git]
+alias gits="git status";
+alias git-diff="git diff";
+alias git-cached="git diff --cached";
+
 # [luxafor light] <= these all need to be fabufor presets
 alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
 alias lux-911="fabufor --pattern 5 --repeat 0";
