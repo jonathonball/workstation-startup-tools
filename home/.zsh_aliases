@@ -63,8 +63,8 @@ alias git-cached="git diff --cached";
 # [luxafor light] <= these all need to be fabufor presets
 alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
 alias lux-911="fabufor --pattern 5 --repeat 0";
-alias lux-away="fabufor --led all --strobe --repeat 0 --time 255 --color DarkRed";
-alias lux-available="fabufor --led all --strobe --repeat 0 --time 255 --color Green";
+alias lux-away="fabufor --strobe --repeat 0 --time 255 --red 255 --green 170 --blue 85";
+alias lux-available="fabufor --strobe --repeat 0 --time 255 --red 85 --green 170 --blue 255";
 
 # [music]
 alias pandora="pianobar";
