@@ -3,7 +3,7 @@
 BASE_DIR=/home/jonathanb
 guake --show;
 
-guake -e "redshift -v" -r redshift;
+guake -r redshift;
 
 guake --new-tab="${BASE_DIR}" -e "music-and-light" -r music-and-light
 guake --new-tab="${BASE_DIR}" -r ecjs
@@ -19,5 +19,6 @@ guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
 guake -e "jclear";
 guake --new-tab="${BASE_DIR}" -e "jclear" -r localhost
 
-guake --hide
+guake --select-tab=0
+
 notify-send -i ~/.face Guake "Setup completed"
