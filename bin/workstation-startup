@@ -5,12 +5,12 @@ while true; do
   if [ $? -eq 0 ]; then
     ps -ef | egrep "[g]uake" > /dev/null 2>&1
     if [ $? -eq 0 ]; then
-      ssh-add-persistently dev-test1;
+      ssh-add-persistently work/dev-test1;
       guake-setup;
       update-atom-ftpconfig /home/jonathanb/project-environments/dev-test1/.ftpconfig
       sleep 3;
       ssh-add -D;
-      ssh-add-persistently github new-stage-playbook;
+      ssh-add-persistently personal/github openstack/new-stage-playbook;
       exit 0;
     else
       echo "Refusing to setup your workstation because guake isnt running!";

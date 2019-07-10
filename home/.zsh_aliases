@@ -87,6 +87,7 @@ alias venter="source ./venv/bin/activate";
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
 alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
+alias ssh-config="atom ~/.ssh/configs";
 
 # [webcam]
 alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null";
