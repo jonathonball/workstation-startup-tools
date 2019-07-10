@@ -2,8 +2,7 @@
 # Written for Guake Terminal 3.0.5
 BASE_DIR=/home/jonathanb
 guake --show;
-
-guake -r redshift;
+guake --new-tab="${BASE_DIR}" -e "redshift -v" -r redshift
 
 guake --new-tab="${BASE_DIR}" -e "music-and-light" -r music-and-light
 guake --new-tab="${BASE_DIR}" -r ecjs
@@ -14,11 +13,11 @@ guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-op
 guake -e "cdop";
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-mysql
 guake -e "clear; MYsql";
-guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r fffffuck
+guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1
 guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
 guake -e "jclear";
 guake --new-tab="${BASE_DIR}" -e "jclear" -r localhost
 
 guake --select-tab=0
-
 notify-send -i ~/.face Guake "Setup completed"
+guake --show;
