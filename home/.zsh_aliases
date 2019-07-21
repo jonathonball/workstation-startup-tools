@@ -41,6 +41,10 @@ function jclear {
   find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
 };
 
+function docker-tags {
+  curl --silent https://registry.hub.docker.com/v1/repositories/${1}/tags | jq '.[] | .name'
+};
+
 ##
 # Aliases
 #
