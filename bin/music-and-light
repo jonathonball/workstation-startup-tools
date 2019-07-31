@@ -3,4 +3,6 @@
 tsessionname=music-and-light
 tmux new-session -d -s $tsessionname;
 tmux split-window -h -t 0;
+tmux send-keys -t left "clear; cat ~/project-environments/workstation-startup/motd/ds9.txt" Enter;
+tmux send-keys -t right "clear; cat ~/project-environments/workstation-startup/motd/ds9-z-axis-as-y.txt" Enter;
 tmux -2 attach-session -t $tsessionname;
