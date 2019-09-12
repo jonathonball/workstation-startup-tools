@@ -10,7 +10,11 @@ while true; do
       update-atom-ftpconfig /home/jonathanb/project-environments/dev-test1/.ftpconfig
       sleep 3;
       ssh-add -D;
-      ssh-add-persistently personal/github openstack/new-stage-playbook;
+      ssh-add-persistently \
+        personal/github \
+        openstack/new-stage-playbook \
+        work/gitlab.imhdev.com \
+        openstack/openstack-instance-key;
       exit 0;
     else
       echo "Refusing to setup your workstation because guake isnt running!";

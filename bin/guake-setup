@@ -17,6 +17,9 @@ guake -e "clear; MYsql";
 guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1
 guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
 guake -e "jclear";
+guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r iad1
+guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
+guake -e "jclear";
 guake --new-tab="${BASE_DIR}" -e "jclear" -r "sidewalk end"
 
 guake --select-tab=0
