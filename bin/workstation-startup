@@ -12,8 +12,8 @@ while true; do
       ssh-add -D;
       ssh-add-persistently \
         personal/github \
-        openstack/new-stage-playbook \
         work/gitlab.imhdev.com \
+        openstack/openstack-guest \
         openstack/openstack-instance-key;
       exit 0;
     else
