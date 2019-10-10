@@ -55,6 +55,7 @@
 # XFCE Specific
   - xfce4-goodies
   - xfce4-popup-clipman
+  - xfwm4-themes
     - add keyboard shortcut to call `xfce4-popup-clipman` 
   - network-manager-openvpn-gnome
   - pavucontrol
