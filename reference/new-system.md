@@ -10,10 +10,10 @@
 
 # Copy in SSH keys
 
-# Copy in keepass key file 
+# Copy in keepass key file
 
 # Install from repos:
-  - exfat-fuse    
+  - exfat-fuse
   - exfat-utils
   - vim
   - curl
@@ -56,7 +56,7 @@
   - xfce4-goodies
   - xfce4-popup-clipman
   - xfwm4-themes
-    - add keyboard shortcut to call `xfce4-popup-clipman` 
+    - add keyboard shortcut to call `xfce4-popup-clipman`
   - network-manager-openvpn-gnome
   - pavucontrol
   - guake
@@ -150,3 +150,15 @@ File path is `~/.atom/styles.less`
     cp /etc/xdg/autostart/gnome-keyring-ssh.desktop ~/.config/autostart
     echo "Hidden=true" >> ~/.config/autostart/gnome-keyring-ssh.desktop
     xfce4-session-logout --logout
+
+# Install vis
+
+    wget https://github.com/dpayne/cli-visualizer/archive/master.zip
+    sudo apt install \
+        libncursesw5-dev \
+        libpulse-dev \
+        libfftw3-dev \
+        rxtv \
+        rxtv-unicode-256color
+    unzip master.zip
+    ./install.sh
