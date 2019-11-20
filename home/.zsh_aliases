@@ -105,4 +105,4 @@ alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height
 # [x]
 alias add-to-tab-order="echo 'Click on the errant window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_NORMAL";
 alias remove-from-tab-order="echo 'Click on the window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_MAIN";
-alias from-from-taskbar="wmctrl -r :SELECT: -b add,skip_taskbar";
+alias remove-from-taskbar="wmctrl -r :SELECT: -b add,skip_taskbar";
