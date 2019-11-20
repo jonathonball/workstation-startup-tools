@@ -45,6 +45,10 @@ function docker-tags {
   curl --silent https://registry.hub.docker.com/v1/repositories/${1}/tags | jq --raw-output '.[] | .name'
 };
 
+function check-dev-dns {
+  dig +short ${1}{,.{imh,hub}{,op},.mock-api}.imhdev.com;
+}
+
 ##
 # Aliases
 #
@@ -91,7 +95,7 @@ alias venter="source ./venv/bin/activate";
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
 alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
-alias ssh-config="atom ~/.ssh/configs";
+alias ssh-config="code ~/.ssh";
 
 # [webcam]
 alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null";
@@ -101,3 +105,4 @@ alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height
 # [x]
 alias add-to-tab-order="echo 'Click on the errant window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_NORMAL";
 alias remove-from-tab-order="echo 'Click on the window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_MAIN";
+alias from-from-taskbar="wmctrl -r :SELECT: -b add,skip_taskbar";
