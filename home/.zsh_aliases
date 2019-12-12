@@ -81,6 +81,7 @@ alias pandora="pianobar";
 alias openstack-developer-instances="openstack server list --column Name --format value --image developer-instance.imhlabs.net.golden";
 alias os="openstack";
 alias os-server-list="openstack server list --column Name --column Status --column Networks --column Image --column Flavor";
+alias os-clear="jclear; openstack server list"
 
 # [pulseaudio]
 alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
