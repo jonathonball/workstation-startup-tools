@@ -5,23 +5,28 @@ guake --show;
 guake --rename-tab="sidewalk start"
 guake --new-tab="${BASE_DIR}" -e "redshift -v" -r redshift
 
-guake --new-tab="${BASE_DIR}" -e "music-and-light" -r music-and-light
-guake --new-tab="${BASE_DIR}" -r ecjs
-
-guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-src
+guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1
 guake -e "cdsrc";
-guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-op
+
+guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1;
+guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
+guake -e "jclear;";
+guake -e "source lax-init.sh";
+
+guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r iad1;
+guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
+guake -e "jclear;";
+guake -e "source iad1-init.sh";
+
+guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-src
+guake -e "cdsrc";
+
+guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-op
 guake -e "cdop";
-guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1-mysql
-guake -e "clear; MYsql";
-guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1
-guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
-guake -e "jclear";
-guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r iad1
-guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
-guake -e "jclear";
+
 guake --new-tab="${BASE_DIR}" -e "jclear" -r "sidewalk end"
 
 guake --select-tab=0
 notify-send -i ~/.face Guake "Setup completed"
 guake --show;
+jclear;
