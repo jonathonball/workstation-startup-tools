@@ -1,38 +1,34 @@
 #!/bin/bash
-
+clear;
 while true; do
-  echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
+  echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1 1>/dev/null
   if [ $? -eq 0 ]; then
-    ps -ef | egrep "[g]uake" > /dev/null 2>&1
+    echo -e "GET http://gitlab.imhdev.com HTTP/1.0\n\n" | nc -w3 gitlab.imhdev.com 80 2>&1 1>/dev/null
     if [ $? -eq 0 ]; then
+      echo "I need to unlock a few keys to get started..";
       ssh-add-persistently work/dev-test1;
       ssh-add-persistently openstack/openstack-guest
       guake-setup;
-      update-atom-ftpconfig /home/jonathanb/project-environments/dev-test1/.ftpconfig
+      clear;
+      echo "Giving new tabs a moment to finish initializing..";
       sleep 3;
-      ssh-add -D;
+      ssh-add -D 2> /dev/null;
+      echo "I need to unlock keys used in your workflow..";
       ssh-add-persistently \
         personal/github \
         work/gitlab.imhdev.com \
         openstack/openstack-guest \
         openstack/openstack-instance-key;
+        clear;
+	      find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
       exit 0;
     else
-      echo "Refusing to setup your workstation because guake isnt running!";
+      echo "Refusing to setup: You are not on the VPN.";
       exit 255;
     fi;
   else
-    read -p "You are off-line.  Attempt connect via ethernet? " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sudo ip link set dev enp0s31f6 up;
-        sudo dhclient;
-        echo "Please run this script again.";
-        exit 0;
-    else
-      echo "Refusing to setup your workstation because you are offline!";
-      exit 255;
-    fi;
+    echo  "Refusing to setup: You are offline.";
+    exit 255;
   fi;
 done;
 

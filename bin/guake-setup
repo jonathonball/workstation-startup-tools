@@ -27,6 +27,4 @@ guake -e "cdop";
 guake --new-tab="${BASE_DIR}" -e "jclear" -r "sidewalk end"
 
 guake --select-tab=0
-notify-send -i ~/.face Guake "Setup completed"
 guake --show;
-jclear;
