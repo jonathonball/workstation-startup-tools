@@ -2,7 +2,7 @@
 # Written for Guake Terminal 3.0.5
 BASE_DIR=/home/jonathanb
 guake --show;
-guake --rename-tab="sidewalk start"
+guake --rename-tab="bbkf"
 guake --new-tab="${BASE_DIR}" -e "redshift -v" -r redshift
 
 guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1
