@@ -36,10 +36,14 @@ function gtfo() {
   sudo shutdown -h +1 "System powering off in 60 seconds.";
 };
 
+function jbanner {
+  find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
+}
+
 function jclear {
   clear;
-  find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
-};
+  jbanner;
+}
 
 function docker-tags {
   curl --silent https://registry.hub.docker.com/v1/repositories/${1}/tags | jq --raw-output '.[] | .name'
@@ -68,11 +72,15 @@ alias gits="git status";
 alias git-diff="git diff";
 alias git-cached="git diff --cached";
 
+# [IMH]
+alias isjim='while $(true); do reset; curl -a what-even-is-an-agent-comma-man-question-mark isjim.live; sleep $((60*5)); done';
+
 # [luxafor light] <= these all need to be fabufor presets
 alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
 alias lux-911="fabufor --pattern 5 --repeat 0";
 alias lux-away="fabufor --strobe --repeat 0 --time 255 --red 255 --green 170 --blue 85";
 alias lux-available="fabufor --strobe --repeat 0 --time 255 --red 85 --green 170 --blue 255";
+alias lux-orange='echo "the good orange"; fabufor --color "rgb(255,34,0)"';
 
 # [music]
 alias pandora="pianobar";

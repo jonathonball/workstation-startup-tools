@@ -10,12 +10,12 @@ guake -e "cdsrc";
 
 guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1;
 guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
-guake -e "jclear;";
+guake -e "reset";
 guake -e "source lax-init.sh";
 
 guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r iad1;
 guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
-guake -e "jclear;";
+guake -e "reset";
 guake -e "source iad1-init.sh";
 
 guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-src
@@ -24,7 +24,7 @@ guake -e "cdsrc";
 guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-op
 guake -e "cdop";
 
-guake --new-tab="${BASE_DIR}" -e "jclear" -r "sidewalk end"
+guake --new-tab="${BASE_DIR}" -e "jbanner" -r "sidewalk end"
 
 guake --select-tab=0
 guake --show;
