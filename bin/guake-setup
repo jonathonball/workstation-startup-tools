@@ -24,7 +24,7 @@ guake -e "cdsrc";
 guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-op
 guake -e "cdop";
 
-guake --new-tab="${BASE_DIR}" -e "jbanner" -r "sidewalk end"
+guake --new-tab="${BASE_DIR}" -e "jbanner -r" -r "sidewalk end"
 
 guake --select-tab=0
 guake --show;

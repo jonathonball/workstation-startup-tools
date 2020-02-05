@@ -37,6 +37,9 @@ function gtfo() {
 };
 
 function jbanner {
+  if [[ "$1" =~ '-r' ]]; then
+      reset;
+  fi;
   find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
 }
 
@@ -86,10 +89,12 @@ alias lux-orange='echo "the good orange"; fabufor --color "rgb(255,34,0)"';
 alias pandora="pianobar";
 
 # [openstack]
-alias openstack-developer-instances="openstack server list --column Name --format value --image developer-instance.imhlabs.net.golden";
 alias os="openstack";
+alias os-server-list-by-image="openstack server list --column Name --format value --image";
 alias os-server-list="openstack server list --column Name --column Status --column Networks --column Image --column Flavor";
-alias os-clear="jclear; openstack server list"
+alias os-clear="jclear; openstack server list";
+alias os-iad1-external-ips="openstack router show iad1 --column external_gateway_info --format value | jq '[ .external_fixed_ips[] .ip_address ]'";
+alias os-lax1-external-ips="openstack router show lax1 --column external_gateway_info --format value | jq '[ .external_fixed_ips[] .ip_address ]'";
 
 # [pulseaudio]
 alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
