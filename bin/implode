@@ -1,11 +1,16 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import sys
+import argparse
 
-output = ''
-for section in sys.argv[1:]:
-    section = section.strip()
-    if section:
-        output = output + section + ' '
-if output:
-    print(' '.join(output.strip().split()))
+ARGPARSER = argparse.ArgumentParser("Joins strings together")
+ARGPARSER.add_argument("-d", "--delimiter", default=",", help="String used to join strings")
+STRINGS_ARG = ARGPARSER.add_argument("strings", metavar="STRINGS", nargs="*", help="Strings to join together, otherwise read from stdin")
+args = ARGPARSER.parse_args()
+
+if len(args.strings):
+    strings = args.strings
+else:
+    strings = [string for line in sys.stdin for string in line.strip().split()]
+
+print(args.delimiter.join(strings))
