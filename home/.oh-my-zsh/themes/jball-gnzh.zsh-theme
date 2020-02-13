@@ -30,7 +30,7 @@ local current_dir="%B%F{blue}%~%f%b"
 local return_code="%(?..[%F{red}%?%f])"
 local git_branch='$(git_prompt_info)'
 local virtualenv_name='$(virtualenv_prompt_info)'
-local top_line_data="$(implode $user_host $current_dir $return_code $git_branch $virtualenv_name)"
+local top_line_data="$(implode -d ' ' $user_host $current_dir $return_code $git_branch $virtualenv_name)"
 local top_line="╭─${top_line_data}"
 
 PROMPT="${top_line}
