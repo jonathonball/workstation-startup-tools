@@ -76,7 +76,7 @@ alias git-diff="git diff";
 alias git-cached="git diff --cached";
 
 # [IMH]
-alias isjim='while $(true); do reset; curl -a what-even-is-an-agent-comma-man-question-mark isjim.live; sleep $((60*5)); done';
+alias isjim='curl -A what-even-is-an-agent-comma-man-question-mark isjim.live;';
 
 # [luxafor light] <= these all need to be fabufor presets
 alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
