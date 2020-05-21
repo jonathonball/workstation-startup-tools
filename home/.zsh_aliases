@@ -54,7 +54,18 @@ function docker-tags {
 
 function check-dev-dns {
   dig +short ${1}{,.{imh,hub}{,op},.mock-api}.imhdev.com;
-}
+};
+
+function ssh2 {
+  if [ ! -z "$1" ]; then
+    HASSCREEN=`screen -list | grep $1`
+    if [ -z "$HASSCREEN" ]; then
+      screen -S $1 ssh $1;
+    else
+      screen -r $1;
+    fi;
+ fi;
+};
 
 ##
 # Aliases
