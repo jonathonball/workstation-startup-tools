@@ -162,3 +162,20 @@ File path is `~/.atom/styles.less`
         rxtv-unicode-256color
     unzip master.zip
     ./install.sh
+
+# Hi-DPI Adjustments
+- Add a `~/.gtkrc-2.0` file.
+
+    style "my-xfce-tasklist-style"
+    {
+      XfceTasklist::max-button-size = 64
+    }
+    class "XfceTasklist" style "my-xfce-tasklist-style"
+
+    style "my-xfce-tasklist-font"
+    {
+      font_name = "Noto Sans Bold 14"
+    }
+    widget "*tasklist*" style "my-xfce-tasklist-font"
+
+- In Firefox `about:config` adjust `layout.css.devPixelsPerPx` to something like 1.5.
