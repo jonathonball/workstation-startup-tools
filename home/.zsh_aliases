@@ -52,6 +52,10 @@ function docker-tags {
   curl --silent https://registry.hub.docker.com/v1/repositories/${1}/tags | jq --raw-output '.[] | .name'
 };
 
+function docker-addr {
+  docker network inspect $(docker network ls | grep "$1" | awk '{ print $1 }');
+};
+
 function check-dev-dns {
   dig +short ${1}{,.{imh,hub}{,op},.mock-api}.imhdev.com;
 };
@@ -81,6 +85,9 @@ alias tree="tree --dirsfirst";
 alias d-enter="docker container exec -it";
 alias d-ls="docker container ls --all";
 alias d-start="docker run -it";
+alias php="docker run -it -v \"$(pwd):/app\" php:7.4-alpine php";
+alias docker-ip="jq -r '.[].Containers[].IPv4Address'";
+alias dc="docker-compose"
 
 # [git]
 alias gits="git status";
