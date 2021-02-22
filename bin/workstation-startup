@@ -6,7 +6,6 @@ while true; do
     echo -e "GET http://gitlab.imhdev.com HTTP/1.0\n\n" | nc -w3 gitlab.imhdev.com 80 2>&1 1>/dev/null
     if [ $? -eq 0 ]; then
       echo "I need to unlock a few keys to get started..";
-      ssh-add-persistently work/dev-test1;
       ssh-add-persistently openstack/openstack-guest
       guake-setup;
       clear;
@@ -19,8 +18,8 @@ while true; do
         work/gitlab.imhdev.com \
         openstack/openstack-guest \
         openstack/openstack-instance-key;
-        clear;
-	      find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
+      clear;
+	    find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
       exit 0;
     else
       echo "Refusing to setup: You are not on the VPN.";

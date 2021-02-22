@@ -5,8 +5,8 @@ guake --show;
 guake --rename-tab="bbkf"
 guake --new-tab="${BASE_DIR}" -e "redshift -v" -r redshift
 
-guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1
-guake -e "cdsrc";
+#guake --new-tab="${BASE_DIR}" -e "ssh dt1" -r dt1
+#guake -e "cdsrc";
 
 guake --new-tab="${BASE_DIR}/project-environments/dev-test/src" -r lax1;
 guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
@@ -18,11 +18,11 @@ guake -e "source ${BASE_DIR}/project-environments/dev-test/venv/bin/activate";
 guake -e "reset";
 guake -e "source iad1-init.sh";
 
-guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-src
-guake -e "cdsrc";
+guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb;
+#guake -e "cdsrc";
 
-guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-op
-guake -e "cdop";
+#guake --new-tab="${BASE_DIR}" -e "ssh jonathanb" -r jonathanb-op
+#guake -e "cdop";
 
 guake --new-tab="${BASE_DIR}" -e "jbanner -r" -r "sidewalk end"
 
