@@ -18,7 +18,8 @@ while true; do
         work/gitlab.imhdev.com \
         openstack/openstack-guest \
         openstack/openstack-instance-key;
-      jbanner -r;
+      clear;
+      find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
       exit 0;
     else
       echo "Refusing to setup: You are not on the VPN.";
