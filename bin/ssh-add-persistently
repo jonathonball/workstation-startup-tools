@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Use this when you have an interactive script that would break if it were allowed to continue without adding an ssh key.
 while (( "$#" )); do
     until ssh-add ~/.ssh/${1}; do
         echo "You fucked up, try again!";
