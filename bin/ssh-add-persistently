@@ -5,4 +5,4 @@ while (( "$#" )); do
         echo "You fucked up, try again!";
     done
     shift;
-done
+done;
