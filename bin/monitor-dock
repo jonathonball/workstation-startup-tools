@@ -1,5 +1,6 @@
 #!/bin/bash
 
-xrandr --output DP-2-3 --mode 1920x1080 --pos 0x0    --rotate normal \
-       --output eDP-1  --mode 1920x1080 --pos 1920x0 --rotate normal \
-       --output DP-2-2 --mode 1920x1080 --pos 3840x0 --rotate normal
+xrandr --output DP-2-2 --mode 2560x1440 --pos 0x0      --rotate normal --rate 74.78 \
+       --output DP-2-3 --mode 2560x1440 --pos 2560x0   --rotate normal --rate 74.78 \
+       --output eDP-1  --mode 1920x1080 --pos 5120x360 --rotate normal;
+
