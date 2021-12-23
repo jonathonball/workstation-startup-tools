@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pacmd set-default-sink "bluez_sink.00_00_AB_CD_5B_23.a2dp_sink"
+
