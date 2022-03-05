@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function newTab() {
+ tabName="$1";
+ if [[ -z "$tabName" ]]; then
+  read -p "Please enter name of new tab: " tabName;
+ fi;
+ guake -e "ssh $tabName" -r "$tabName";
+ guake --new-tab="/home/jonathanb" -e "jbanner -r" -r "sidewalk end";
+};
+
+currentTab=$(guake -g);
+if [[ $# > 0 ]]; then
+ for tabName in "$@"; do
+  newTab $tabName;
+ done;
+else
+ newTab;
+fi;
+guake -s $currentTab;
