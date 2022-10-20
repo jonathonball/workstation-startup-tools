@@ -1,20 +1,23 @@
 #!/bin/bash
 
 function newTab() {
- tabName="$1";
- if [[ -z "$tabName" ]]; then
-  read -p "Please enter name of new tab: " tabName;
- fi;
- guake -e "ssh $tabName" -r "$tabName";
- guake --new-tab="/home/jonathanb" -e "jbanner -r" -r "sidewalk end";
+  tabName="$1";
+  if [[ -z "$tabName" ]]; then
+    read -p "Please enter name of new tab: " tabName;
+  fi;
+   guake --execute-command="ssh $tabName" \
+         --rename-current-tab="$tabName";
+   guake --new-tab="/home/jonathanb" \
+         --execute-command="jbanner -r" \
+         --rename-current-tab="sidewalk end";
 };
 
-currentTab=$(guake -g);
+currentTab="$(guake --selected-tab)";
 if [[ $# > 0 ]]; then
- for tabName in "$@"; do
-  newTab $tabName;
- done;
+  for tabName in "$@"; do
+    newTab $tabName;
+  done;
 else
- newTab;
+  newTab;
 fi;
-guake -s $currentTab;
+guake --select-tab="${currentTab}";
