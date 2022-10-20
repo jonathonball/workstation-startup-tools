@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function newTab() {
+  tabName="$(basename ${1})";
+  tabPath="$1";
+  guake --execute-command="cd $tabPath" \
+        --rename-current-tab="$tabName";
+  guake --new-tab="${HOME}" \
+        --execute-command="jbanner -r" \
+        --rename-current-tab="sidewalk end";
+};
+
+function tabError() {
+  msg="$1";
+  base_msg="Unable to open tab";
+  if [[ -z "$msg" ]]; then
+    echo "${base_msg}.";
+  else
+    echo "${base_msg} ${msg}";
+  fi;
+  exit 1;
+};
+
+currentTab="$(guake --selected-tab)";
+if [[ $# > 0 ]]; then
+  for tabName in "$@"; do
+    if [[ -d $tabName ]]; then
+      newTab $tabName;
+    else
+      tabError "because $tabName is not a valid path.";
+    fi;
+  done;
+else
+  tabError "without arguments.";
+fi;
+guake --select-tab="${currentTab}";
