@@ -49,7 +49,7 @@ function jclear {
 }
 
 function docker-tags {
-  curl --silent https://registry.hub.docker.com/v1/repositories/${1}/tags | jq --raw-output '.[] | .name'
+  curl --silent https://registry.hub.docker.com/v2/repositories/library/${1}/tags | jq --raw-output '.results[] | .name'
 };
 
 function docker-addr {
