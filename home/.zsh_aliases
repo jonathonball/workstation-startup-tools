@@ -23,97 +23,34 @@ fi;
 ##
 # Functions
 #
-function clean-up-docker() {
+function docker-stop-all() {
   for container in $(docker container ls --quiet); do
     echo "Found docker container ${container} running, attempting to stop..";
     docker container stop $container;
   done;
 };
 
-function gtfo() {
-  sudo echo "Starting shutdown sequence..";
-  clean-up-docker;
-  sudo shutdown -h +1 "System powering off in 60 seconds.";
-};
-
-function jbanner {
-  if [[ "$1" =~ '-r' ]]; then
-      reset;
-  fi;
-  find ~/project-environments/workstation-startup/motd -type f | shuf -n 1 | xargs cat -;
-}
-
-function jclear {
-  clear;
-  jbanner;
-}
-
 function docker-tags {
   curl --silent https://registry.hub.docker.com/v2/repositories/library/${1}/tags | jq --raw-output '.results[] | .name' | sed 's/^/ - /g';
-};
-
-function docker-addr {
-  docker network inspect $(docker network ls | grep "$1" | awk '{ print $1 }');
-};
-
-function check-dev-dns {
-  dig +short ${1}{,.{imh,hub}{,op},.mock-api}.imhdev.com;
-};
-
-function ssh2 {
-  if [ ! -z "$1" ]; then
-    HASSCREEN=`screen -list | grep $1`
-    if [ -z "$HASSCREEN" ]; then
-      screen -S $1 ssh $1;
-    else
-      screen -r $1;
-    fi;
- fi;
 };
 
 ##
 # Aliases
 #
-# [ansible]
-alias openstack-playbook="ansible-playbook -i /usr/local/bin/openstack_inventory.py";
 
 # [bash and zsh]
 alias ll="ls -lah";
 alias tree="tree --dirsfirst";
 
-# [docker]
-alias d-enter="docker container exec -it";
-alias d-ls="docker container ls --all";
-alias d-start="docker run -it";
-alias php="docker run -it -v \"$(pwd):/app\" php:7.4-alpine php";
-alias docker-ip="jq -r '.[].Containers[].IPv4Address'";
-alias dc="docker-compose"
-
 # [git]
-alias gits="git status";
+alias git-status="git status";
 alias git-diff="git diff";
-alias git-cached="git diff --cached";
 
 # [IMH]
 alias isjim='curl -A what-even-is-an-agent-comma-man-question-mark isjim.live;';
 
-# [luxafor light] <= these all need to be fabufor presets
-alias lux-strobe="fabufor --led all --strobe --repeat 0 --time 255 --color";
-alias lux-911="fabufor --pattern 5 --repeat 0";
-alias lux-away="fabufor --strobe --repeat 0 --time 255 --red 255 --green 170 --blue 85";
-alias lux-available="fabufor --strobe --repeat 0 --time 255 --red 85 --green 170 --blue 255";
-alias lux-orange='echo "the good orange"; fabufor --color "rgb(255,34,0)"';
-
-# [music]
-alias pandora="pianobar";
-
 # [openstack]
 alias os="openstack";
-alias os-server-list-by-image="openstack server list --column Name --format value --image";
-alias os-server-list="openstack server list --column Name --column Status --column Networks --column Image --column Flavor";
-alias os-clear="jclear; openstack server list";
-alias os-iad1-external-ips="openstack router show iad1 --column external_gateway_info --format value | jq '[ .external_fixed_ips[] .ip_address ]'";
-alias os-lax1-external-ips="openstack router show lax1 --column external_gateway_info --format value | jq '[ .external_fixed_ips[] .ip_address ]'";
 
 # [pulseaudio]
 alias volume-devices="pacmd list-sinks | awk -F'[<>]' '/name:/ { print \$2 }'";
@@ -122,7 +59,7 @@ alias volume-set-laptop="pactl set-sink-volume $(volume-devices | grep pci)";
 alias volume="volume-set-dock";
 
 # [python]
-alias venter="source ./venv/bin/activate";
+alias venter="pyenv activate \$(basename \$(pwd))";
 
 # [ssh]
 alias ssh-password-only="ssh -o PreferredAuthentications=password";
@@ -130,19 +67,11 @@ alias ssh-this-key-only="ssh -o IdentitiesOnly=yes -i";
 alias ssh-show-fingerprint="ssh-keygen -l -E md5 -f";
 alias ssh-config="code ~/.ssh";
 
-# [webcam]
-alias camera-matrix="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo matrixview 2>/dev/null";
-alias camera-ascii="mplayer tv:// -tv driver=v4l2:device=/dev/video0:fps=30 -vo caca 2>/dev/null";
-alias camera="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 -vf mirror 2>/dev/null";
-alias camera0="mplayer tv:// -tv driver=v4l2:device=/dev/video0:width=1280:height=720:fps=30 -vf mirror 2>/dev/null";
-alias camera1="mplayer tv:// -tv driver=v4l2:device=/dev/video1 -vf mirror 2>/dev/null";
-
 # [x]
 alias add-to-tab-order="echo 'Click on the errant window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_NORMAL";
 alias remove-from-tab-order="echo 'Click on the window:'; xprop -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_MAIN";
 alias remove-from-taskbar="wmctrl -r :SELECT: -b add,skip_taskbar";
 
-# [ubuntu/debian]
-alias apt-update="sudo apt update && apt list --upgradable";
-alias apt-upgrade="sudo apt upgrade";
+# redshift
+alias redshift="redshift -v -l 36.82856:-76.05720 -t 6500:2500"
 
