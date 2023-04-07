@@ -39,8 +39,15 @@ function docker-tags {
 #
 
 # [bash and zsh]
-alias ll="ls -lah";
+alias ll="ls -lahF --group-directories-first";
 alias tree="tree --dirsfirst";
+
+function jbanner {
+  if [[ "$1" =~ '-r' ]]; then
+      reset;
+  fi;
+  find ~/Projects/github.com/jonathonball/workstation-startup-tools/motd -type f | shuf -n 1 | xargs cat -;
+};
 
 # [git]
 alias git-status="git status";
