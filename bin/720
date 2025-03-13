@@ -1,2 +1,2 @@
 WINDOWID=$(xdotool getactivewindow);
-xdotool windowsize $WINDOWID 1280 720
+xdotool windowsize $WINDOWID 1280 720;
