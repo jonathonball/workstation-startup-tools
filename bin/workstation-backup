@@ -1,36 +1,80 @@
 #!/bin/bash
+# The filesystem located at BACKUP_MOUNT_POINT should be formatted with ext4
+# BACKUP_UUID should be the UUID of the backup drive and should be defined in this script or in the environment
 
-function datestamp() {
-    echo -n $(date +"[%Y-%m-%d %H:%M:%S] ");
+function logline() {
+    printf "%s %s.\n" "$(date +"[%Y-%m-%d %H:%M:%S]")" "${1}"
 };
 
-BACKUP_MOUNT_POINT=/media/jonathonb/Samsung256;
-BACKUP_DIR=${BACKUP_MOUNT_POINT}/Backup/;
-
-devicefile=$(/usr/bin/lsblk --fs --json | jq -r '.blockdevices | .[] | select(has("children")) | .children[] | select(.uuid == "'${BACKUP_UUID}'") | .name');
-if [[ -z ${devicefile} ]]; then
-    echo "$(datestamp) Backup drive not mounted";
+function backup_failed() {
+    logline "Backup failed";
     exit 1;
-fi;
+};
 
-if [[ ! -d ${BACKUP_MOUNT_POINT} ]]; then
-    sudo mkdir -p ${BACKUP_MOUNT_POINT};
-    sudo mount /dev/sdb1 ${BACKUP_MOUNT_POINT};
-fi;
+logline "Starting backup script";
 
-mkdir -p ${BACKUP_DIR};
-if [[ -d ${BACKUP_MOUNT_POINT} ]]; then
-    echo "$(datestamp) Backup started";
-    rsync --quiet --archive --acls --xattrs --delete ~/Projects/ ${BACKUP_DIR}/Projects/
-    rsync --quiet --archive --acls --xattrs --delete ~/Documents/ ${BACKUP_DIR}/Documents/
-    rsync --quiet --archive --acls --xattrs --delete ~/Pictures/ ${BACKUP_DIR}/Pictures/
-    rsync --quiet --archive --acls --xattrs --delete ~/.ssh/ ${BACKUP_DIR}/.ssh/
-    sudo umount /dev/sdb1;
-    if [[ -d ${BACKUP_MOUNT_POINT} ]]; then
-        sudo rmdir ${BACKUP_MOUNT_POINT};
+logline "Checking for required applications";
+for application in jq rsync lsblk; do
+    if ! type $application > /dev/null 2>&1; then
+        logline "${application} application not installed and is required by this script";
+        backup_failed;
     fi;
-    echo "$(datestamp) Backup completed";
-else
-    echo "$(datestamp) Could not create mountpoint backup failed";
-    exit 1;
+done;
+logline "Required applications installed";
+
+BACKUP_MOUNT_POINT=/media/${USER}/backup;
+BACKUP_DIR=${BACKUP_MOUNT_POINT}/Backup/;
+BACKUP_MOUNT_POINT_PERMS=775;
+
+devicefile=$(lsblk --fs --json | jq -r '.blockdevices[] | select(has("children")) | .children[] | select(.uuid == "'${BACKUP_UUID}'") | .name');
+[[ -z ${devicefile} ]] && logline "Backup drive not attached" && backup_failed;
+
+if [[ ! -d $BACKUP_MOUNT_POINT ]]; then
+    sudo mkdir -p $BACKUP_MOUNT_POINT;
+    [[ ! -d $BACKUP_MOUNT_POINT ]] && logline "Could not create mountpoint" && backup_failed;
+    logline "Mounting backup drive";
+    sudo mount /dev/${devicefile} $BACKUP_MOUNT_POINT;
+    if ! stat --format=%G $BACKUP_MOUNT_POINT | grep -q "${USER}"; then
+        logline "Setting ownership for ${BACKUP_MOUNT_POINT}";
+        sudo chown root:${USER} $BACKUP_MOUNT_POINT;
+    fi;
+    if ! stat --format=%G $BACKUP_MOUNT_POINT | grep -q "${USER}"; then
+        logline "Failed to set ownership for ${BACKUP_MOUNT_POINT}";
+        backup_failed;
+    fi;
+    if ! stat --format=%a $BACKUP_MOUNT_POINT | grep -q "${BACKUP_MOUNT_POINT_PERMS}"; then
+        logline "Setting permissions for ${BACKUP_MOUNT_POINT}";
+        sudo chmod $BACKUP_MOUNT_POINT_PERMS $BACKUP_MOUNT_POINT;
+    fi;
+    if ! stat --format=%a $BACKUP_MOUNT_POINT | grep -q "${BACKUP_MOUNT_POINT_PERMS}"; then
+        logline "Failed to set permissions for ${BACKUP_MOUNT_POINT}";
+        backup_failed;
+    fi;
+    logline "Backup drive mounted";
 fi;
+
+if [[ -d $BACKUP_MOUNT_POINT ]]; then
+    logline "Backup starting";
+    mkdir -p $BACKUP_DIR;
+    for directory in Projects Documents Pictures .ssh; do
+        if rsync --quiet --archive --acls --xattrs --delete ~/${directory}/ ${BACKUP_DIR}/${directory}/; then
+            logline "Backup of ${directory} complete";
+        else
+            logline "Backup of ${directory} failed";
+            backup_failed;
+        fi;
+    done;
+    logline "Unmounting backup drive";
+    sudo umount /dev/${devicefile};
+    if [[ -d $BACKUP_MOUNT_POINT ]]; then
+        logline "Removing mountpoint";
+        sudo rmdir $BACKUP_MOUNT_POINT;
+    fi;
+    [[ -d $BACKUP_MOUNT_POINT ]] && logline "Failed to remove mountpoint" && backup_failed;
+    logline "Backup complete";
+else
+    logline "Could not create mountpoint";
+    backup_failed;
+fi;
+
+logline "Backup script complete";
