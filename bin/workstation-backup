@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function datestamp() {
+    echo -n $(date +"[%Y-%m-%d %H:%M:%S] ");
+};
+
+BACKUP_MOUNT_POINT=/media/jonathonb/Samsung256;
+BACKUP_DIR=${BACKUP_MOUNT_POINT}/Backup/;
+
+devicefile=$(/usr/bin/lsblk --fs --json | jq -r '.blockdevices | .[] | select(has("children")) | .children[] | select(.uuid == "'${BACKUP_UUID}'") | .name');
+if [[ -z ${devicefile} ]]; then
+    echo "$(datestamp) Backup drive not mounted";
+    exit 1;
+fi;
+
+if [[ ! -d ${BACKUP_MOUNT_POINT} ]]; then
+    sudo mkdir -p ${BACKUP_MOUNT_POINT};
+    sudo mount /dev/sdb1 ${BACKUP_MOUNT_POINT};
+fi;
+
+mkdir -p ${BACKUP_DIR};
+if [[ -d ${BACKUP_MOUNT_POINT} ]]; then
+    echo "$(datestamp) Backup started";
+    rsync --quiet --archive --acls --xattrs --delete ~/Projects/ ${BACKUP_DIR}/Projects/
+    rsync --quiet --archive --acls --xattrs --delete ~/Documents/ ${BACKUP_DIR}/Documents/
+    rsync --quiet --archive --acls --xattrs --delete ~/Pictures/ ${BACKUP_DIR}/Pictures/
+    rsync --quiet --archive --acls --xattrs --delete ~/.ssh/ ${BACKUP_DIR}/.ssh/
+    sudo umount /dev/sdb1;
+    if [[ -d ${BACKUP_MOUNT_POINT} ]]; then
+        sudo rmdir ${BACKUP_MOUNT_POINT};
+    fi;
+    echo "$(datestamp) Backup completed";
+else
+    echo "$(datestamp) Could not create mountpoint backup failed";
+    exit 1;
+fi;
