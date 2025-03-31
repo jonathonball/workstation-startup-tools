@@ -26,6 +26,10 @@ BACKUP_MOUNT_POINT=/media/${USER}/backup;
 BACKUP_DIR=${BACKUP_MOUNT_POINT}/Backup/;
 BACKUP_MOUNT_POINT_PERMS=775;
 
+if [[ -z ${BACKUP_UUID} ]]; then
+    logline "BACKUP_UUID not set";
+    backup_failed;
+fi;
 devicefile=$(lsblk --fs --json | jq -r '.blockdevices[] | select(has("children")) | .children[] | select(.uuid == "'${BACKUP_UUID}'") | .name');
 [[ -z ${devicefile} ]] && logline "Backup drive not attached" && backup_failed;
 
@@ -57,7 +61,11 @@ if [[ -d $BACKUP_MOUNT_POINT ]]; then
     logline "Backup starting";
     mkdir -p $BACKUP_DIR;
     for directory in Projects Documents Pictures .ssh; do
-        if rsync --quiet --archive --acls --xattrs --delete ~/${directory}/ ${BACKUP_DIR}/${directory}/; then
+        target_dir=${BACKUP_DIR}/${directory};
+        if rsync --quiet --archive --acls --xattrs --delete ~/${directory}/ ${target_dir}/; then
+            # Ensure all data is written to disk before continuing
+            logline "Syncing filesystem for ${directory}";
+            sudo sync --file-system $target_dir;
             logline "Backup of ${directory} complete";
         else
             logline "Backup of ${directory} failed";
