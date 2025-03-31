@@ -63,15 +63,15 @@ if [[ -d $BACKUP_MOUNT_POINT ]]; then
     for directory in Projects Documents Pictures .ssh; do
         target_dir=${BACKUP_DIR}/${directory};
         if rsync --quiet --archive --acls --xattrs --delete ~/${directory}/ ${target_dir}/; then
-            # Ensure all data is written to disk before continuing
-            logline "Syncing filesystem for ${directory}";
-            sudo sync --file-system $target_dir;
             logline "Backup of ${directory} complete";
         else
             logline "Backup of ${directory} failed";
             backup_failed;
         fi;
     done;
+    logline "Syncing filesystem for ${directory}";
+    sudo sync --file-system $BACKUP_MOUNT_POINT;
+    logline "Backup of all directories complete";
     logline "Unmounting backup drive";
     sudo umount /dev/${devicefile};
     if [[ -d $BACKUP_MOUNT_POINT ]]; then
@@ -79,7 +79,6 @@ if [[ -d $BACKUP_MOUNT_POINT ]]; then
         sudo rmdir $BACKUP_MOUNT_POINT;
     fi;
     [[ -d $BACKUP_MOUNT_POINT ]] && logline "Failed to remove mountpoint" && backup_failed;
-    logline "Backup complete";
 else
     logline "Could not create mountpoint";
     backup_failed;
