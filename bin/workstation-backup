@@ -16,7 +16,7 @@ logline "Starting backup script";
 logline "Checking for required applications";
 for application in jq rsync lsblk; do
     if ! type $application > /dev/null 2>&1; then
-        logline "${application} application not installed and is required by this script";
+        logline "${application} application not installed or is not in the path. It is required by this script";
         backup_failed;
     fi;
 done;
