@@ -36,6 +36,14 @@ SHOWS = [
     {
         "name": "Star Trek: Lower Decks",
         "seasons": [10, 10, 10, 10, 10],
+    },
+    {
+        "name": "Star Trek: The Animated Series",
+        "seasons": [16, 6]
+    },
+    {
+        "name": "Star Trek: Prodigy",
+        "seasons": [20, 20]
     }
 ]
 
