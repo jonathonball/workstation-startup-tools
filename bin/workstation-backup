@@ -60,7 +60,7 @@ fi;
 if [[ -d $BACKUP_MOUNT_POINT ]]; then
     logline "Backup starting";
     mkdir -p $BACKUP_DIR;
-    for directory in Projects Documents Pictures .ssh; do
+    for directory in Projects Documents Pictures .ssh .cert; do
         target_dir=${BACKUP_DIR}/${directory};
         if rsync --quiet --archive --acls --xattrs --delete ~/${directory}/ ${target_dir}/; then
             logline "Backup of ${directory} complete";
@@ -68,9 +68,9 @@ if [[ -d $BACKUP_MOUNT_POINT ]]; then
             logline "Backup of ${directory} failed";
             backup_failed;
         fi;
+        logline "Syncing filesystem for ${directory}";
+        sudo sync --file-system $BACKUP_MOUNT_POINT;
     done;
-    logline "Syncing filesystem for ${directory}";
-    sudo sync --file-system $BACKUP_MOUNT_POINT;
     logline "Backup of all directories complete";
     logline "Unmounting backup drive";
     sudo umount /dev/${devicefile};
