@@ -24,6 +24,18 @@ SHOWS = [
     {
         "name": "Star Trek: Deep Space Nine",
         "seasons": [19, 26, 26, 25, 26, 26, 25]
+    },
+    {
+        "name": "Star Trek: Discovery",
+        "seasons": [15, 14, 13, 13, 10]
+    },
+    {
+        "name": "Star Trek: Picard",
+        "seasons": [10, 10, 10],
+    },
+    {
+        "name": "Star Trek: Lower Decks",
+        "seasons": [10, 10, 10, 10, 10],
     }
 ]
 
